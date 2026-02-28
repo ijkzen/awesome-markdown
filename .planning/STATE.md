@@ -31,6 +31,12 @@ See: .planning/PROJECT.md (updated 2026-03-01)
 - Deferred code highlighting to Phase 2
 - Deferred copy button to Phase 3
 
+## Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 1 | github-markdown 适应主题变化 | 2026-02-28 | 5e15d78 | [1-github-markdown](./quick/1-github-markdown/) |
+
 ## Execution
 
 - Run `/gsd-discuss-phase 1` to discuss phase approach
@@ -41,3 +47,5 @@ See: .planning/PROJECT.md (updated 2026-03-01)
 *State updated: 2026-02-28 after Phase 1 Plan 1 completion*
 *Plan completed: 01-01 (Core Library Setup)*
 *Commit: f814247*
+*Quick task completed: github-markdown theme adaptation*
+*Commit: 5e15d78*
