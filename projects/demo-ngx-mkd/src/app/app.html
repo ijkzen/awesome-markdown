@@ -46,8 +46,12 @@
   
   <!-- Right panel: Rendered preview -->
   <div class="panel preview-panel">
-    <div class="preview-content" [class.gh-dark]="isDark()">
-      <lib-ngx-mkd [markdown]="markdownSource()"></lib-ngx-mkd>
+    <div class="preview-content">
+      <lib-ngx-mkd 
+        [markdown]="markdownSource()" 
+        [class.light]="!isDark()"
+        [class.dark]="isDark()">
+      </lib-ngx-mkd>
     </div>
   </div>
 </main>
