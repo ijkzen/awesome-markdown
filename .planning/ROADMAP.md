@@ -77,10 +77,11 @@
 
 **Goal:** Build demo-ngx-mkd with layout and theming
 
-**Status:** ✓ Complete (2026-03-01)
+**Status:** ○ In Progress (gap closure)
 
 **Plans:**
 - [x] 04-01-PLAN.md — Split-pane demo app implementation
+- [ ] 04-02-PLAN.md — Gap closure: theme toggle and code highlighting fixes
 
 **Requirements:**
 - LAYO-01: Fixed header bar at top of page
