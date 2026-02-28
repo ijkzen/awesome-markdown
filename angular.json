@@ -6,5 +6,94 @@
   },
   "newProjectRoot": "projects",
   "projects": {
+    "ngx-mkd": {
+      "projectType": "library",
+      "root": "projects/ngx-mkd",
+      "sourceRoot": "projects/ngx-mkd/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-mkd/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-mkd/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ngx-mkd/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "demo-ngx-mkd": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/demo-ngx-mkd",
+      "sourceRoot": "projects/demo-ngx-mkd/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/demo-ngx-mkd/src/main.ts",
+            "tsConfig": "projects/demo-ngx-mkd/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/demo-ngx-mkd/public"
+              }
+            ],
+            "styles": [
+              "projects/demo-ngx-mkd/src/styles.css"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2MB",
+                  "maximumError": "3MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "demo-ngx-mkd:build:production"
+            },
+            "development": {
+              "buildTarget": "demo-ngx-mkd:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test"
+        }
+      }
+    }
   }
 }
