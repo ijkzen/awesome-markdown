@@ -4,14 +4,13 @@
 /* 
  * Consumer responsibility: Import github-markdown-css here
  * (The library itself does NOT import CSS - that's the consumer's job)
+ * 
+ * Import both light and dark themes to support theme switching
  */
-@import 'github-markdown-css/github-markdown.css';
-
-/* Optional: Use light theme only */
-/* @import 'github-markdown-css/github-markdown-light.css'; */
+@import 'github-markdown-css/github-markdown-light.css';
+@import 'github-markdown-css/github-markdown-dark.css';
 
 /* 
- * Optional: Add theme class for dark mode
  * github-markdown-css supports .markdown-body.light and .markdown-body.dark
  * By default it uses .markdown-body class
  */
