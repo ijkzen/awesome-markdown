@@ -1,103 +1,222 @@
-# Phase 1: Core Library Setup - Plan
-
-**Planned:** 2026-03-01
-**Phase:** 1
-**Goal:** Set up ngx-mkd with marked and github-markdown-css
-
+---
+phase: 01-core-library-setup
+plan: 01
+type: execute
+wave: 1
+depends_on: []
+files_modified:
+  - projects/ngx-mkd/src/lib/ngx-mkd.ts
+  - projects/ngx-mkd/src/lib/ngx-mkd.component.css
+  - projects/demo-ngx-mkd/src/app/app.component.ts
+  - projects/demo-ngx-mkd/src/styles.css
+autonomous: true
+requirements:
+  - CORE-01
+  - CORE-02
+  - CORE-03
+must_haves:
+  truths:
+    - ngx-mkd component accepts markdown via @Input()
+    - marked converts markdown to HTML with GFM enabled
+    - CSS responsibility is on consumer, not library
+    - Demo app imports github-markdown-css
+  artifacts:
+    - path: projects/ngx-mkd/src/lib/ngx-mkd.ts
+      provides: Markdown rendering component
+      exports: [NgxMkdComponent]
+    - path: projects/demo-ngx-mkd/src/styles.css
+      provides: CSS imports for demo app
+      contains: github-markdown-css
+  key_links:
+    - from: demo-ngx-mkd
+      to: github-markdown-css
+      via: styles.css import
 ---
 
-## Task 1.1: Install Dependencies
+<objective>
+Set up the ngx-mkd Angular component with marked for markdown parsing. Library provides structural rendering only; styling CSS is the consumer's responsibility.
 
-**Description:** Install marked and github-markdown-css packages
+Purpose: Deliver a working markdown-to-HTML component that follows proper library architecture (no internal CSS imports).
+Output: Updated component with signal-based inputs, marked integration, and proper separation of styling concerns.
+</objective>
 
-**Requirements:**
-- CORE-01, CORE-02, CORE-03
+<execution_context>
+@~/.config/opencode/get-shit-done/workflows/execute-plan.md
+@~/.config/opencode/get-shit-done/templates/summary.md
+</execution_context>
 
-**Steps:**
-1. Run `npm install marked github-markdown-css` in the root directory
-2. Verify packages are added to package.json
+<context>
+@.planning/PROJECT.md
+@.planning/ROADMAP.md
+@.planning/phases/01-core-library-setup/01-CONTEXT.md
 
-**Verification:**
-- Check package.json for marked and github-markdown-css entries
+Key decision from CONTEXT.md:
+- ngx-mkd does NOT import CSS or define color styles
+- CSS (github-markdown-css) is imported by demo-ngx-mkd, not the library
+- Library provides structural styles only (code block positioning, layout)
+</context>
 
----
+<tasks>
 
-## Task 1.2: Update NgxMkd Component
+<task type="auto">
+  <name>Task 1: Install marked dependency</name>
+  <files>package.json</files>
+  <action>
+    Install marked package for markdown-to-HTML conversion:
+    
+    ```bash
+    npm install marked
+    ```
+    
+    Note: github-markdown-css will be installed by the demo app (consumer responsibility per architecture decision), not the library itself.
+    
+    Verify package.json includes marked dependency.
+  </action>
+  <verify>
+    <automated>grep -q '"marked"' package.json && echo "marked installed"</automated>
+  </verify>
+  <done>marked package is listed in dependencies</done>
+</task>
 
-**Description:** Update the NgxMkd component with signal-based input and marked integration
+<task type="auto">
+  <name>Task 2: Update NgxMkd component with marked integration</name>
+  <files>projects/ngx-mkd/src/lib/ngx-mkd.ts</files>
+  <action>
+    Read current component at projects/ngx-mkd/src/lib/ngx-mkd.ts, then update it:
+    
+    1. Import required Angular modules: Component, input, computed, ViewEncapsulation, SafeHtml, DomSanitizer
+    2. Import marked from 'marked'
+    3. Configure marked with gfm: true and breaks: true
+    4. Use signal-based input: markdown = input.required<string>()
+    5. Create computed signal for rendered HTML: renderedHtml = computed(() => marked.parse(...))
+    6. Use DomSanitizer for safe HTML binding
+    7. Template: wrapper div with 'markdown-body' class and [innerHTML] binding
+    8. ViewEncapsulation.Emulated (default)
+    9. **NO CSS imports in component** — this is consumer's responsibility per architecture decision
+    
+    Component should be standalone with no external CSS dependencies.
+  </action>
+  <verify>
+    <automated>cd projects/ngx-mkd && npx tsc --noEmit src/lib/ngx-mkd.ts 2>&1 | head -20</automated>
+  </verify>
+  <done>
+    - Component compiles without errors
+    - Uses marked with GFM enabled
+    - Has input.required<string>() for markdown
+    - Uses computed() for HTML generation
+    - Template uses markdown-body class
+    - NO CSS imports in the component file
+  </done>
+</task>
 
-**Requirements:**
-- CORE-01, CORE-02, CORE-03
+<task type="auto">
+  <name>Task 3: Add structural CSS for library</name>
+  <files>projects/ngx-mkd/src/lib/ngx-mkd.component.css</files>
+  <action>
+    Create minimal structural CSS file for the component at projects/ngx-mkd/src/lib/ngx-mkd.component.css.
+    
+    This CSS should ONLY include:
+    - Structural/layout styles (positioning, sizing)
+    - Code block container positioning (for future copy button)
+    - NO color, background, or theme-related styles
+    - NO github-markdown-css styles (consumer imports these)
+    
+    Example structural styles:
+    - Code block wrapper positioning (relative, for absolute-positioned children)
+    - Basic layout for the markdown-body wrapper
+  </action>
+  <verify>
+    <automated>test -f projects/ngx-mkd/src/lib/ngx-mkd.component.css && echo "CSS file exists"</automated>
+  </verify>
+  <done>
+    - CSS file exists
+    - Contains only structural styles
+    - No color/background definitions
+    - No github-markdown-css imports
+  </done>
+</task>
 
-**Steps:**
-1. Read current component at `projects/ngx-mkd/src/lib/ngx-mkd.ts`
-2. Update component:
-   - Add `input.required<string>()` for markdown input
-   - Add `computed()` for rendered HTML
-   - Configure marked with `gfm: true` and `breaks: true`
-   - Add `DomSanitizer` for safe HTML binding
-   - Import `github-markdown-css/github-markdown.css`
-   - Use `ViewEncapsulation.Emulated`
-   - Template: wrapper div with `markdown-body` class and `[innerHTML]`
+<task type="auto">
+  <name>Task 4: Update demo app to import CSS</name>
+  <files>
+    projects/demo-ngx-mkd/src/styles.css
+    projects/demo-ngx-mkd/src/app/app.component.ts
+  </files>
+  <action>
+    Since the library doesn't import CSS, the demo app (consumer) must do this:
+    
+    1. Install github-markdown-css in demo app:
+       ```bash
+       cd projects/demo-ngx-mkd && npm install github-markdown-css
+       ```
+    
+    2. Add to projects/demo-ngx-mkd/src/styles.css:
+       ```css
+       @import 'github-markdown-css/github-markdown.css';
+       /* Or for light theme only: @import 'github-markdown-css/github-markdown-light.css'; */
+       ```
+    
+    3. Update projects/demo-ngx-mkd/src/app/app.component.ts:
+       - Import NgxMkdComponent from 'ngx-mkd'
+       - Add sample markdown content for testing
+       - Use the component in template: <lib-ngx-mkd [markdown]="content" />
+  </action>
+  <verify>
+    <automated>grep -q "github-markdown-css" projects/demo-ngx-mkd/src/styles.css && echo "CSS imported in demo"</automated>
+  </verify>
+  <done>
+    - github-markdown-css imported in demo styles.css
+    - Demo app uses NgxMkdComponent
+    - Sample markdown renders correctly
+  </done>
+</task>
 
-**Code Structure:**
-```typescript
-import { Component, input, computed, ViewEncapsulation } from '@angular/core';
-import { marked } from 'marked';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import 'github-markdown-css/github-markdown.css';
+<task type="auto">
+  <name>Task 5: Build and verify</name>
+  <files>dist/</files>
+  <action>
+    Build both library and demo app to verify everything works:
+    
+    ```bash
+    ng build ngx-mkd
+    ng build demo-ngx-mkd
+    ```
+    
+    Check for:
+    - No build errors
+    - CSS is properly loaded in demo app
+    - Markdown renders with GitHub styling (from demo's CSS import)
+    - Component doesn't bundle CSS (library is CSS-agnostic)
+  </action>
+  <verify>
+    <automated>ng build ngx-mkd --configuration production && ng build demo-ngx-mkd --configuration production && echo "Build successful"</automated>
+  </verify>
+  <done>
+    - ngx-mkd builds successfully
+    - demo-ngx-mkd builds successfully
+    - Markdown renders with proper styling
+    - No CSS bundled in library output
+  </done>
+</task>
 
-@Component({
-  selector: 'lib-ngx-mkd',
-  standalone: true,
-  encapsulation: ViewEncapsulation.Emulated,
-  imports: [],
-  template: `<div class="markdown-body" [innerHTML]="safeHtml()"></div>`
-})
-export class NgxMkdComponent {
-  markdown = input.required<string>();
-  
-  renderedHtml = computed(() => {
-    return marked.parse(this.markdown(), { gfm: true, breaks: true }) as string;
-  });
-  
-  constructor(private sanitizer: DomSanitizer) {}
-  
-  safeHtml(): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(this.renderedHtml());
-  }
-}
-```
+</tasks>
 
-**Verification:**
-- Component compiles without errors
+<verification>
+1. Component accepts markdown via @Input() — verify input binding works
+2. Marked parses with GFM — verify tables, strikethrough work
+3. CSS is consumer's responsibility — verify library has no CSS imports
+4. Demo app renders styled markdown — verify github-markdown-css is active
+</verification>
 
----
+<success_criteria>
+- ngx-mkd component compiles and exports correctly
+- marked converts markdown to HTML with GFM support
+- Library has NO CSS imports (clean architecture)
+- Demo app imports and applies github-markdown-css
+- Both library and demo build successfully
+- Markdown renders with GitHub-style appearance in demo
+</success_criteria>
 
-## Task 1.3: Verify Component in Demo App
-
-**Description:** Test the component in the demo application
-
-**Requirements:**
-- CORE-01, CORE-03
-
-**Steps:**
-1. Update demo-ngx-mkd to import and use NgxMkdComponent
-2. Add sample markdown content to test rendering
-3. Build the application to verify it works
-
-**Verification:**
-- `npm run build` or `ng build` completes successfully
-- Demo app renders markdown with GitHub styling
-
----
-
-## Success Criteria
-
-1. ✓ MarkdownComponent can receive markdown string input
-2. ✓ Marked parses markdown with GFM enabled
-3. ✓ Output applies github-markdown-css body class
-
----
-
-*Plan created: 2026-03-01*
+<output>
+After completion, create .planning/phases/01-core-library-setup/01-01-SUMMARY.md
+</output>
