@@ -108,7 +108,6 @@ export class App {
     // Persist theme changes to localStorage
     effect(() => {
       localStorage.setItem('theme', this.theme());
-      this.updateDarkClass();
     });
   }
 
@@ -118,15 +117,6 @@ export class App {
       return saved;
     }
     return 'light';
-  }
-
-  private updateDarkClass(): void {
-    // Toggle gh-dark class on body for github-markdown-css
-    if (this.isDark()) {
-      document.body.classList.add('gh-dark');
-    } else {
-      document.body.classList.remove('gh-dark');
-    }
   }
 
   protected toggleTheme(): void {
