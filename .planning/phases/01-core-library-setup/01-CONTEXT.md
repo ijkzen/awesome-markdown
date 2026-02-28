@@ -27,17 +27,18 @@ Set up the ngx-mkd Angular component with marked for markdown parsing and github
 ### CSS Approach
 - Apply `markdown-body` class via wrapper div
 - ViewEncapsulation: Emulated
-- Component imports github-markdown-css (not consumer's responsibility)
+- **ngx-mkd does NOT import CSS or define color styles** — this is consumer's responsibility
+- CSS (github-markdown-css) and highlight.js themes are imported by demo-ngx-mkd, not the library
+- Library provides structural styles only (code block positioning, layout)
 
 ### Change Detection
 - Strategy: OnPush
 - Reactive: Signal-based
 - HTML generation: `computed()` that re-computes when markdown signal changes
 
-### Claude's Discretion
-- Exact CSS wrapper element styling
-- Where to place the import statement for github-markdown-css
-- Whether to use synchronous or lazy loading for the CSS
+### OpenCode's Discretion
+- Exact CSS wrapper element styling (margins, padding)
+- Structural CSS for code block layout (positioning only, no colors)
 
 </decisions>
 
