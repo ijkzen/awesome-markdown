@@ -1,6 +1,6 @@
 # State: ngx-mkd
 
-**Last Updated:** 2026-03-01
+**Last Updated:** 2026-02-28
 
 ## Project Reference
 
@@ -10,7 +10,8 @@ See: .planning/PROJECT.md (updated 2026-03-01)
 
 ## Current Status
 
-- **Phase:** Not started
+- **Phase:** 1 (Complete)
+- **Plan:** 01 (Complete)
 - **Mode:** YOLO (auto-approve)
 - **Parallelization:** Enabled
 
@@ -18,10 +19,17 @@ See: .planning/PROJECT.md (updated 2026-03-01)
 
 | Phase | Name | Status |
 |-------|------|--------|
-| 1 | Core Library Setup | ○ Pending |
+| 1 | Core Library Setup | ● Complete |
 | 2 | Code Highlighting | ○ Pending |
 | 3 | Copy Button | ○ Pending |
 | 4 | Demo Application | ○ Pending |
+
+## Decisions Made
+
+- Library does NOT import CSS - consumer responsibility
+- CSS responsibility separation established
+- Deferred code highlighting to Phase 2
+- Deferred copy button to Phase 3
 
 ## Execution
 
@@ -30,4 +38,6 @@ See: .planning/PROJECT.md (updated 2026-03-01)
 - Use `/gsd-progress` to check status
 
 ---
-*State updated: 2026-03-01 after initialization*
+*State updated: 2026-02-28 after Phase 1 Plan 1 completion*
+*Plan completed: 01-01 (Core Library Setup)*
+*Commit: f814247*

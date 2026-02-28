@@ -18,15 +18,22 @@
 
 **Goal:** Set up ngx-mkd with marked and github-markdown-css
 
+**Status:** ● Complete (2026-02-28)
+
+**Plans:**
+- [x] 01-PLAN.md — Core library with marked (completed: CSS consumer responsibility)
+- [x] 01-01-SUMMARY.md — Summary with commit f814247
+
 **Requirements:**
-- CORE-01: Component accepts markdown source via input binding
-- CORE-02: Convert markdown to HTML using marked with GFM enabled
-- CORE-03: Apply github-markdown-css classes for GitHub-style rendering
+- CORE-01: Component accepts markdown source via input binding ✓
+- CORE-02: Convert markdown to HTML using marked with GFM enabled ✓
+- CORE-03: Apply github-markdown-css classes for GitHub-style rendering ✓ (consumer imports CSS)
 
 **Success Criteria:**
-1. MarkdownComponent can receive markdown string input
-2. Marked parses markdown with GFM enabled
-3. Output applies github-markdown-css body class
+1. MarkdownComponent can receive markdown string input ✓
+2. Marked parses markdown with GFM enabled ✓
+3. Output applies github-markdown-css body class (imported by consumer) ✓
+4. Library has no CSS imports — proper separation of concerns ✓
 
 ---
 
