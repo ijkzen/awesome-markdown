@@ -97,8 +97,6 @@
   height: 100%;
   box-sizing: border-box;
 }
-
-/* Dark mode styles */
 :host-context(.gh-dark) .header {
   background: #0d1117;
   border-bottom-color: #30363d;
@@ -134,48 +132,4 @@
 
 :host-context(.gh-dark) .preview-panel {
   background: #0d1117;
-}
-
-/* Github markdown dark mode overrides */
-.preview-content.gh-dark ::ng-deep .markdown-body {
-  background-color: #0d1117 !important;
-  color: #c9d1d9 !important;
-}
-
-.preview-content.gh-dark ::ng-deep .markdown-body code,
-.preview-content.gh-dark ::ng-deep .markdown-body pre {
-  background-color: #161b22 !important;
-}
-
-.preview-content.gh-dark ::ng-deep .markdown-body .code-lang,
-.preview-content.gh-dark ::ng-deep .markdown-body .copy-button {
-  background-color: #21262d !important;
-  color: #8b949e !important;
-}
-
-.preview-content.gh-dark ::ng-deep .markdown-body .copy-button:hover {
-  background-color: #30363d !important;
-  color: #c9d1d9 !important;
-}
-
-.preview-content.gh-dark ::ng-deep .markdown-body a {
-  color: #58a6ff !important;
-}
-
-.preview-content.gh-dark ::ng-deep .markdown-body blockquote {
-  border-left-color: #30363d !important;
-  color: #8b949e !important;
-}
-
-.preview-content.gh-dark ::ng-deep .markdown-body table th,
-.preview-content.gh-dark ::ng-deep .markdown-body table td {
-  border-color: #30363d !important;
-}
-
-.preview-content.gh-dark ::ng-deep .markdown-body table tr {
-  background-color: #0d1117 !important;
-}
-
-.preview-content.gh-dark ::ng-deep .markdown-body table tr:nth-child(2n) {
-  background-color: #161b22 !important;
 }
