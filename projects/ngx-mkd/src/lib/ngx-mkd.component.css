@@ -1,0 +1,25 @@
+/* 
+ * Structural CSS for ngx-mkd library
+ * 
+ * This file provides ONLY structural/layout styles.
+ * Color and theme styles are the responsibility of the consumer.
+ * The consumer should import github-markdown-css or their own styling.
+ */
+
+:host {
+  display: block;
+}
+
+/* Basic wrapper layout */
+.markdown-body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 100%;
+}
+
+/* Code block structural positioning only */
+/* (Future: for copy button positioning, not colors) */
+.code-block-wrapper {
+  position: relative;
+  margin: 16px 0;
+}

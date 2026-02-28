@@ -1,3 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
-
+/* Demo app global styles */
 @import 'tailwindcss';
+
+/* 
+ * Consumer responsibility: Import github-markdown-css here
+ * (The library itself does NOT import CSS - that's the consumer's job)
+ */
+@import 'github-markdown-css/github-markdown.css';
+
+/* Optional: Use light theme only */
+/* @import 'github-markdown-css/github-markdown-light.css'; */
+
+/* 
+ * Optional: Add theme class for dark mode
+ * github-markdown-css supports .markdown-body.light and .markdown-body.dark
+ * By default it uses .markdown-body class
+ */
+.markdown-body {
+  box-sizing: border-box;
+}
