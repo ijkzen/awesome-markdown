@@ -1,6 +1,7 @@
 import { Component, computed, effect, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgxMkdComponent } from 'ngx-mkd';
+import { environment } from '../environments/environment';
 
 type ViewTransitionDocument = Document & {
   startViewTransition?: (updateCallback: () => void) => ViewTransition;
@@ -144,7 +145,7 @@ export class App {
   }
 
   private applyMarkdownTheme(theme: 'light' | 'dark'): void {
-    const href = theme === 'dark' ? '/markdown-dark.css' : '/markdown-light.css';
+    const href = `${environment.baseHref}markdown-${theme}.css`;
     let themeLink = document.getElementById(this.markdownThemeLinkId) as HTMLLinkElement | null;
 
     if (!themeLink) {
@@ -160,7 +161,7 @@ export class App {
   }
 
   private applyHighlightTheme(theme: 'light' | 'dark'): void {
-    const href = theme === 'dark' ? '/hljs-dark.css' : '/hljs-light.css';
+    const href = `${environment.baseHref}hljs-${theme}.css`;
     let themeLink = document.getElementById(this.highlightThemeLinkId) as HTMLLinkElement | null;
 
     if (!themeLink) {
