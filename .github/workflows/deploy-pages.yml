@@ -43,7 +43,6 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist/demo-ngx-mkd/browser
-          name: demo-ngx-mkd
 
   deploy:
     needs: build
