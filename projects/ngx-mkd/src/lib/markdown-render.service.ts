@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import hljs from 'highlight.js';
 import { Marked, Tokens } from 'marked';
+import markedKatex from 'marked-katex-extension';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class MarkdownRenderService {
     renderer: {
       code: ({ text, lang }: Tokens.Code) => this.renderCodeBlock(text, lang)
     }
-  });
+  }, markedKatex({ throwOnError: false, nonStandard: true }));
 
   render(markdown: string): string {
     const parsed = this.markdownParser.parse(markdown);

@@ -12,6 +12,7 @@
 	- 指定语言时优先按语言高亮
 	- 未指定语言时自动识别高亮
 - 支持 Mermaid 图表渲染（```mermaid fenced code block）
+- 支持 KaTeX 数学公式渲染（行内 `$...$` 与块级 `$$...$$`）
 - 代码块工具栏
 	- 左上角语言标签（默认 `text`）
 	- 右上角 `Copy` 按钮
@@ -24,10 +25,10 @@
 在你的 Angular 项目中安装：
 
 ```bash
-pnpm add ngx-mkd highlight.js mermaid github-markdown-css
+pnpm add ngx-mkd highlight.js mermaid katex github-markdown-css
 ```
 
-> `highlight.js` 与 `mermaid` 为 `ngx-mkd` 的 peer dependency，需要业务项目自行安装。
+> `highlight.js`、`mermaid`、`katex` 为 `ngx-mkd` 的 peer dependency，需要业务项目自行安装。
 
 ## 快速使用
 
@@ -58,6 +59,17 @@ graph TD
 ```
 ````
 
+数学公式示例：
+
+```md
+行内公式：$E = mc^2$
+
+块级公式：
+$$
+\int_{0}^{\infty} e^{-x^2} \, dx = \frac{\sqrt{\pi}}{2}
+$$
+```
+
 ### 2) 引入 markdown 与代码高亮主题（推荐）
 
 按演示项目方式，在 `angular.json` 的 `build.options.styles` 中增加非注入样式包：
@@ -65,12 +77,15 @@ graph TD
 ```json
 [
 	"src/styles.css",
+	"node_modules/katex/dist/katex.min.css",
 	{ "input": "node_modules/github-markdown-css/github-markdown-light.css", "bundleName": "markdown-light", "inject": false },
 	{ "input": "node_modules/github-markdown-css/github-markdown-dark.css", "bundleName": "markdown-dark", "inject": false },
 	{ "input": "node_modules/highlight.js/styles/github.css", "bundleName": "hljs-light", "inject": false },
 	{ "input": "node_modules/highlight.js/styles/github-dark.css", "bundleName": "hljs-dark", "inject": false }
 ]
 ```
+
+> KaTeX 公式渲染依赖 `katex.min.css`，请确保已在全局样式中引入。
 
 ## 主题配置（以 demo-ngx-mkd 为蓝本）
 

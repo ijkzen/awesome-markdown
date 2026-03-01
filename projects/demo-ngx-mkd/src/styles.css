@@ -1,5 +1,21 @@
 /* Demo app global styles */
 @import 'tailwindcss';
+@import 'katex/dist/katex.min.css';
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+app-root {
+  display: block;
+}
+
+lib-ngx-mkd {
+  display: block;
+}
 
 .markdown-body {
   padding: 20px;

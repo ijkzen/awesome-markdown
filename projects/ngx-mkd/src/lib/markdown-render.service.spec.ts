@@ -32,4 +32,11 @@ describe('MarkdownRenderService', () => {
     expect(html).toContain('data-mermaid-source="');
     expect(html).toContain('graph TD');
   });
+
+  it('should render inline and block math formulas using KaTeX markup', () => {
+    const html = service.render('Inline: $E=mc^2$\n\n$$\\int_0^1 x^2 dx$$');
+
+    expect(html).toContain('class="katex"');
+    expect(html).toContain('katex-display');
+  });
 });

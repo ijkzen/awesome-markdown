@@ -5,10 +5,12 @@
     "@angular/common": "^21.2.0",
     "@angular/core": "^21.2.0",
     "highlight.js": "^11.11.1",
+    "katex": "^0.16.33",
     "mermaid": "^11.12.3"
   },
   "dependencies": {
     "marked": "^17.0.3",
+    "marked-katex-extension": "^5.1.7",
     "tslib": "^2.3.0"
   },
   "sideEffects": false

@@ -62,6 +62,16 @@ graph TD
   C -->|mermaid| E[Mermaid Diagram]
 \`\`\`
 
+## Math Formulas (KaTeX)
+
+Inline formula example: $E = mc^2$
+
+Block formula example:
+
+$$
+\\int_{0}^{\\infty} e^{-x^2} \\, dx = \\frac{\\sqrt{\\pi}}{2}
+$$
+
 ## Tables
 
 | Feature | Status | Notes |

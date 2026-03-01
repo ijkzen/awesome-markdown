@@ -52,6 +52,7 @@
             ],
             "styles": [
               "projects/demo-ngx-mkd/src/styles.css",
+              "node_modules/katex/dist/katex.min.css",
               {
                 "input": "node_modules/github-markdown-css/github-markdown-light.css",
                 "bundleName": "markdown-light",

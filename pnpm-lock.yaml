@@ -32,12 +32,18 @@ importers:
       highlight.js:
         specifier: ^11.11.1
         version: 11.11.1
+      katex:
+        specifier: ^0.16.33
+        version: 0.16.33
       marked:
         specifier: ^17.0.3
         version: 17.0.3
       marked-highlight:
         specifier: ^2.2.3
         version: 2.2.3(marked@17.0.3)
+      marked-katex-extension:
+        specifier: ^5.1.7
+        version: 5.1.7(katex@0.16.33)(marked@17.0.3)
       mermaid:
         specifier: ^11.12.3
         version: 11.12.3
@@ -2609,6 +2615,12 @@ packages:
   marked-highlight@2.2.3:
     resolution: {integrity: sha512-FCfZRxW/msZAiasCML4isYpxyQWKEEx44vOgdn5Kloae+Qc3q4XR7WjpKKf8oMLk7JP9ZCRd2vhtclJFdwxlWQ==}
     peerDependencies:
+      marked: '>=4 <18'
+
+  marked-katex-extension@5.1.7:
+    resolution: {integrity: sha512-CVFzrqwpXGVaHByqcVvO/JfzW/OMWrAF3pEfNYNIruzBzM64moANSHapCg1qbzEN+NGf5unHwkMfwJIXHzyDAw==}
+    peerDependencies:
+      katex: '>=0.16 <0.17'
       marked: '>=4 <18'
 
   marked@16.4.2:
@@ -5880,6 +5892,11 @@ snapshots:
 
   marked-highlight@2.2.3(marked@17.0.3):
     dependencies:
+      marked: 17.0.3
+
+  marked-katex-extension@5.1.7(katex@0.16.33)(marked@17.0.3):
+    dependencies:
+      katex: 0.16.33
       marked: 17.0.3
 
   marked@16.4.2: {}
