@@ -1,5 +1,5 @@
 {
-  "mode": "yolo",
+  "mode": "interactive",
   "depth": "comprehensive",
   "parallelization": true,
   "commit_docs": true,
@@ -23,8 +23,8 @@
     },
     "presets": {
       "genius": {
-        "planning": "bailian-coding-plan/kimi-k2.5",
-        "execution": "bailian-coding-plan/MiniMax-M2.5",
+        "planning": "bailian-coding-plan/MiniMax-M2.5",
+        "execution": "bailian-coding-plan/kimi-k2.5",
         "verification": "bailian-coding-plan/glm-5"
       }
     },
