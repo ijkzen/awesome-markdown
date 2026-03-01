@@ -1,64 +1,133 @@
-# NgxMkd
+# ngx-mkd / AwesomeMarkdown
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.0.
+English | [简体中文](README.zh-CN.md)
 
-## Code scaffolding
+An Angular markdown rendering library with a demo application.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- `projects/ngx-mkd`: library source
+- `projects/demo-ngx-mkd`: demo app (live editor, preview, theme switching)
 
-```bash
-ng generate component component-name
-```
+## Features
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- Markdown rendering with `marked` (GFM + line breaks)
+- Syntax highlighting with `highlight.js`
+   - Uses language-specific highlighting when language is provided
+   - Falls back to auto-detection when language is missing
+- Mermaid diagram rendering from fenced `mermaid` code blocks
+- KaTeX math rendering for inline `$...$` and block `$$...$$`
+- Code block toolbar
+   - Language label (`text` by default)
+   - `Copy` button
+   - `Copied` state for 2 seconds after success
+   - Failed copy logs `console.error`
+- `MarkdownRenderService` for reusable `markdown -> html` conversion
 
-```bash
-ng generate --help
-```
+## Installation
 
-## Building
-
-To build the library, run:
-
-```bash
-ng build ngx-mkd
-```
-
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
-
-### Publishing the Library
-
-Once the project is built, you can publish your library by following these steps:
-
-1. Navigate to the `dist` directory:
-
-   ```bash
-   cd dist/ngx-mkd
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Install in your Angular project:
 
 ```bash
-ng test
+pnpm add ngx-mkd highlight.js mermaid katex github-markdown-css
 ```
 
-## Running end-to-end tests
+`highlight.js`, `mermaid`, and `katex` are peer dependencies and must be installed by consumers.
 
-For end-to-end (e2e) testing, run:
+## Quick start
+
+### 1) Use `NgxMkdComponent`
+
+```ts
+import { Component, signal } from '@angular/core';
+import { NgxMkdComponent } from 'ngx-mkd';
+
+@Component({
+   selector: 'app-markdown-page',
+   imports: [NgxMkdComponent],
+   template: `<lib-ngx-mkd [markdown]="markdown()" [theme]="theme()"></lib-ngx-mkd>`
+})
+export class MarkdownPageComponent {
+   protected theme = signal<'light' | 'dark'>('light');
+   protected markdown = signal('# Hello ngx-mkd\n\n```ts\nconst ok = true\n```');
+}
+```
+
+Mermaid example:
+
+````md
+```mermaid
+graph TD
+   A[Author Markdown] --> B[ngx-mkd]
+   B --> C[Render SVG Diagram]
+```
+````
+
+Math example:
+
+```md
+Inline: $E = mc^2$
+
+Block:
+$$
+\int_{0}^{\infty} e^{-x^2} \, dx = \frac{\sqrt{\pi}}{2}
+$$
+```
+
+### 2) Configure markdown and highlight themes
+
+Follow the demo setup by adding non-injected style bundles in `angular.json`:
+
+```json
+[
+   "src/styles.css",
+   "node_modules/katex/dist/katex.min.css",
+   { "input": "node_modules/github-markdown-css/github-markdown-light.css", "bundleName": "markdown-light", "inject": false },
+   { "input": "node_modules/github-markdown-css/github-markdown-dark.css", "bundleName": "markdown-dark", "inject": false },
+   { "input": "node_modules/highlight.js/styles/github.css", "bundleName": "hljs-light", "inject": false },
+   { "input": "node_modules/highlight.js/styles/github-dark.css", "bundleName": "hljs-dark", "inject": false }
+]
+```
+
+KaTeX rendering requires `katex.min.css` in global styles.
+
+## Theme switching strategy (used by demo)
+
+The demo switches themes by updating `<link>` tags at runtime:
+
+```ts
+private applyMarkdownTheme(theme: 'light' | 'dark'): void {
+   const href = theme === 'dark' ? '/markdown-dark.css' : '/markdown-light.css';
+   this.upsertThemeLink('markdown-theme-stylesheet', href);
+}
+
+private applyHighlightTheme(theme: 'light' | 'dark'): void {
+   const href = theme === 'dark' ? '/hljs-dark.css' : '/hljs-light.css';
+   this.upsertThemeLink('highlight-theme-stylesheet', href);
+}
+```
+
+Reference implementation:
+
+- `projects/demo-ngx-mkd/src/app/app.ts`
+- `angular.json`
+
+## Optional: Use render service directly
+
+```ts
+import { inject } from '@angular/core';
+import { MarkdownRenderService } from 'ngx-mkd';
+
+const markdownRenderService = inject(MarkdownRenderService);
+const html = markdownRenderService.render('```js\nconsole.log(1)\n```');
+```
+
+`MarkdownRenderService` converts markdown to HTML (including mermaid placeholders); actual diagram rendering is handled by `NgxMkdComponent` after DOM update.
+
+## Development commands
 
 ```bash
-ng e2e
+pnpm start
+pnpm ng build ngx-mkd --configuration development
+pnpm ng build demo-ngx-mkd --configuration development
+pnpm ng test ngx-mkd --watch=false
+node --expose-gc scripts/benchmark-markdown-render.mjs
 ```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

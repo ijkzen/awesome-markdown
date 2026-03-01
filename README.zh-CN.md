@@ -1,40 +1,40 @@
 # ngx-mkd / AwesomeMarkdown
 
-English | [简体中文](README.zh-CN.md)
+[English](README.md) | 简体中文
 
-An Angular markdown rendering library with a demo application.
+一个基于 Angular 的 Markdown 渲染组件库与演示应用。
 
-- `projects/ngx-mkd`: library source
-- `projects/demo-ngx-mkd`: demo app (live editor, preview, theme switching)
+- `projects/ngx-mkd`：组件库源码
+- `projects/demo-ngx-mkd`：演示应用（实时编辑、预览、主题切换）
 
-## Features
+## 功能特性
 
-- Markdown rendering with `marked` (GFM + line breaks)
-- Syntax highlighting with `highlight.js`
-  - Uses language-specific highlighting when language is provided
-  - Falls back to auto-detection when language is missing
-- Mermaid diagram rendering from fenced `mermaid` code blocks
-- KaTeX math rendering for inline `$...$` and block `$$...$$`
-- Code block toolbar
-  - Language label (`text` by default)
-  - `Copy` button
-  - `Copied` state for 2 seconds after success
-  - Failed copy logs `console.error`
-- `MarkdownRenderService` for reusable `markdown -> html` conversion
+- 基于 `marked` 的 Markdown 渲染（GFM + 换行）
+- 基于 `highlight.js` 的代码高亮
+  - 指定语言时优先使用该语言高亮
+  - 未指定语言时自动识别
+- Mermaid 图表渲染（`mermaid` fenced code block）
+- KaTeX 公式渲染（行内 `$...$` 与块级 `$$...$$`）
+- 代码块工具栏
+  - 语言标签（默认 `text`）
+  - `Copy` 按钮
+  - 复制成功后显示 `Copied` 2 秒
+  - 复制失败输出 `console.error`
+- 提供 `MarkdownRenderService`，可单独复用 `markdown -> html` 能力
 
-## Installation
+## 安装
 
-Install in your Angular project:
+在你的 Angular 项目中安装：
 
 ```bash
 pnpm add ngx-mkd highlight.js mermaid katex github-markdown-css
 ```
 
-`highlight.js`, `mermaid`, and `katex` are peer dependencies and must be installed by consumers.
+`highlight.js`、`mermaid`、`katex` 是 `ngx-mkd` 的 peerDependencies，需由业务项目自行安装。
 
-## Quick start
+## 快速开始
 
-### 1) Use `NgxMkdComponent`
+### 1) 使用 `NgxMkdComponent`
 
 ```ts
 import { Component, signal } from '@angular/core';
@@ -51,7 +51,7 @@ export class MarkdownPageComponent {
 }
 ```
 
-Mermaid example:
+Mermaid 示例：
 
 ````md
 ```mermaid
@@ -61,20 +61,20 @@ graph TD
 ```
 ````
 
-Math example:
+数学公式示例：
 
 ```md
-Inline: $E = mc^2$
+行内：$E = mc^2$
 
-Block:
+块级：
 $$
 \int_{0}^{\infty} e^{-x^2} \, dx = \frac{\sqrt{\pi}}{2}
 $$
 ```
 
-### 2) Configure markdown and highlight themes
+### 2) 配置 markdown 与代码高亮主题
 
-Follow the demo setup by adding non-injected style bundles in `angular.json`:
+参考 demo，在 `angular.json` 的 `build.options.styles` 中添加非注入样式包：
 
 ```json
 [
@@ -87,11 +87,11 @@ Follow the demo setup by adding non-injected style bundles in `angular.json`:
 ]
 ```
 
-KaTeX rendering requires `katex.min.css` in global styles.
+KaTeX 渲染依赖全局引入 `katex.min.css`。
 
-## Theme switching strategy (used by demo)
+## 主题切换策略（demo 同款）
 
-The demo switches themes by updating `<link>` tags at runtime:
+demo 通过运行时更新 `<link>` 来切换主题：
 
 ```ts
 private applyMarkdownTheme(theme: 'light' | 'dark'): void {
@@ -105,12 +105,12 @@ private applyHighlightTheme(theme: 'light' | 'dark'): void {
 }
 ```
 
-Reference implementation:
+参考实现：
 
 - `projects/demo-ngx-mkd/src/app/app.ts`
 - `angular.json`
 
-## Optional: Use render service directly
+## 可选：仅使用渲染 Service
 
 ```ts
 import { inject } from '@angular/core';
@@ -120,9 +120,9 @@ const markdownRenderService = inject(MarkdownRenderService);
 const html = markdownRenderService.render('```js\nconsole.log(1)\n```');
 ```
 
-`MarkdownRenderService` converts markdown to HTML (including mermaid placeholders); actual diagram rendering is handled by `NgxMkdComponent` after DOM update.
+`MarkdownRenderService` 负责把 markdown 转为 HTML（包含 mermaid 占位结构）；图表实际绘制由 `NgxMkdComponent` 在 DOM 更新后执行。
 
-## Development commands
+## 开发命令
 
 ```bash
 pnpm start
