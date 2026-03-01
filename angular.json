@@ -51,7 +51,17 @@
               }
             ],
             "styles": [
-              "projects/demo-ngx-mkd/src/styles.css"
+              "projects/demo-ngx-mkd/src/styles.css",
+              {
+                "input": "node_modules/github-markdown-css/github-markdown-light.css",
+                "bundleName": "markdown-light",
+                "inject": false
+              },
+              {
+                "input": "node_modules/github-markdown-css/github-markdown-dark.css",
+                "bundleName": "markdown-dark",
+                "inject": false
+              }
             ]
           },
           "configurations": {

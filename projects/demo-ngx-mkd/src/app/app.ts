@@ -96,6 +96,8 @@ Try editing the markdown on the left and see the preview update on the right!
   styleUrl: './app.css'
 })
 export class App {
+  private readonly markdownThemeLinkId = 'markdown-theme-stylesheet';
+
   protected readonly title = signal('ngx-mkd');
   
   protected theme = signal<'light' | 'dark'>(this.loadTheme());
@@ -105,10 +107,30 @@ export class App {
   protected isDark = computed(() => this.theme() === 'dark');
 
   constructor() {
-    // Persist theme changes to localStorage
+    // Persist and apply theme changes
     effect(() => {
-      localStorage.setItem('theme', this.theme());
+      const currentTheme = this.theme();
+      localStorage.setItem('theme', currentTheme);
+      document.body.classList.toggle('dark', currentTheme === 'dark');
+      document.body.classList.toggle('light', currentTheme === 'light');
+      this.applyMarkdownTheme(currentTheme);
     });
+  }
+
+  private applyMarkdownTheme(theme: 'light' | 'dark'): void {
+    const href = theme === 'dark' ? '/markdown-dark.css' : '/markdown-light.css';
+    let themeLink = document.getElementById(this.markdownThemeLinkId) as HTMLLinkElement | null;
+
+    if (!themeLink) {
+      themeLink = document.createElement('link');
+      themeLink.id = this.markdownThemeLinkId;
+      themeLink.rel = 'stylesheet';
+      document.head.appendChild(themeLink);
+    }
+
+    if (themeLink.getAttribute('href') !== href) {
+      themeLink.setAttribute('href', href);
+    }
   }
 
   private loadTheme(): 'light' | 'dark' {
@@ -121,12 +143,5 @@ export class App {
 
   protected toggleTheme(): void {
     this.theme.update(current => current === 'light' ? 'dark' : 'light');
-    if (this.isDark()) {
-      document.body.classList.add('dark');
-      document.body.classList.remove('light');
-    } else {
-      document.body.classList.add('light');
-      document.body.classList.remove('dark');
-    }
   }
 }

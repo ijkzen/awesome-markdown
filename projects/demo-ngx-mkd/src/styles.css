@@ -1,37 +1,7 @@
 /* Demo app global styles */
 @import 'tailwindcss';
 
-@import 'github-markdown-css/github-markdown-dark.css';
-
-/* 2. 基础样式 */
 .markdown-body {
   padding: 20px;
   transition: background-color 0.3s, color 0.3s;
-  /* 可选：添加过渡动画 */
-}
-
-/* 3. 强制应用 Light 主题 */
-.light.markdown-body {
-  @import 'github-markdown-css/github-markdown-light.css';
-  /* 
-     由于 github-markdown-css 的 dark 版本通常使用 CSS 变量或属性选择器，
-     我们需要确保 light 版本的优先级更高，或者重置 dark 版本的变量。
-     
-     简单粗暴的方法：利用 CSS 的层叠特性。
-     如果 light.css 和 dark.css 都定义了 .markdown-body，
-     后引入的会覆盖先引入的（在权重相同的情况下）。
-     
-     但为了确保万无一失，我们可以显式地将 dark 的样式在 .light 类下禁用，
-     或者利用 specificity (特异性)。
-  */
-}
-
-/* 4. 强制应用 Dark 主题 */
-.dark.markdown-body {
-  @import 'github-markdown-css/github-markdown-dark.css';
-  /* 
-     这里利用了 CSS 的层叠。
-     因为 dark.css 在 light.css 之后引入，
-     所以 .markdown-body.dark 内的元素会继承 dark.css 的变量。
-  */
 }
