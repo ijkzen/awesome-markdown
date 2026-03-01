@@ -4,7 +4,8 @@
   "peerDependencies": {
     "@angular/common": "^21.2.0",
     "@angular/core": "^21.2.0",
-    "highlight.js": "^11.11.1"
+    "highlight.js": "^11.11.1",
+    "mermaid": "^11.12.3"
   },
   "dependencies": {
     "marked": "^17.0.3",

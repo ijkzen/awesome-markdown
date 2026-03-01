@@ -52,6 +52,16 @@ const users: User[] = [
 ];
 \`\`\`
 
+Mermaid flowchart example:
+
+\`\`\`mermaid
+graph TD
+  A[Write Markdown] --> B[ngx-mkd Render]
+  B --> C{Code Block Type}
+  C -->|normal| D[highlight.js]
+  C -->|mermaid| E[Mermaid Diagram]
+\`\`\`
+
 ## Tables
 
 | Feature | Status | Notes |
@@ -97,6 +107,7 @@ Try editing the markdown on the left and see the preview update on the right!
 })
 export class App {
   private readonly markdownThemeLinkId = 'markdown-theme-stylesheet';
+  private readonly highlightThemeLinkId = 'highlight-theme-stylesheet';
 
   protected readonly title = signal('ngx-mkd');
   
@@ -114,6 +125,7 @@ export class App {
       document.body.classList.toggle('dark', currentTheme === 'dark');
       document.body.classList.toggle('light', currentTheme === 'light');
       this.applyMarkdownTheme(currentTheme);
+      this.applyHighlightTheme(currentTheme);
     });
   }
 
@@ -124,6 +136,22 @@ export class App {
     if (!themeLink) {
       themeLink = document.createElement('link');
       themeLink.id = this.markdownThemeLinkId;
+      themeLink.rel = 'stylesheet';
+      document.head.appendChild(themeLink);
+    }
+
+    if (themeLink.getAttribute('href') !== href) {
+      themeLink.setAttribute('href', href);
+    }
+  }
+
+  private applyHighlightTheme(theme: 'light' | 'dark'): void {
+    const href = theme === 'dark' ? '/hljs-dark.css' : '/hljs-light.css';
+    let themeLink = document.getElementById(this.highlightThemeLinkId) as HTMLLinkElement | null;
+
+    if (!themeLink) {
+      themeLink = document.createElement('link');
+      themeLink.id = this.highlightThemeLinkId;
       themeLink.rel = 'stylesheet';
       document.head.appendChild(themeLink);
     }

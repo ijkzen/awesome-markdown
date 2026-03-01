@@ -67,15 +67,19 @@
 /* Source panel */
 .source-panel {
   border-right: 1px solid #e1e4e8;
+  overflow: hidden;
 }
 
 .markdown-input {
+  display: block;
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
   padding: 16px;
   border: none;
   outline: none;
   resize: none;
+  overflow: auto;
   font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
   font-size: 14px;
   line-height: 1.5;

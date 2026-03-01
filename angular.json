@@ -61,6 +61,16 @@
                 "input": "node_modules/github-markdown-css/github-markdown-dark.css",
                 "bundleName": "markdown-dark",
                 "inject": false
+              },
+              {
+                "input": "node_modules/highlight.js/styles/github.css",
+                "bundleName": "hljs-light",
+                "inject": false
+              },
+              {
+                "input": "node_modules/highlight.js/styles/github-dark.css",
+                "bundleName": "hljs-dark",
+                "inject": false
               }
             ]
           },

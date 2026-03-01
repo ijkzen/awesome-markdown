@@ -11,15 +11,57 @@
 }
 
 /* Basic wrapper layout */
-.markdown-body {
+lib-ngx-mkd .markdown-body {
   box-sizing: border-box;
   min-width: 200px;
   max-width: 100%;
 }
 
-/* Code block structural positioning only */
-/* (Future: for copy button positioning, not colors) */
-.code-block-wrapper {
+lib-ngx-mkd .code-block-wrapper {
   position: relative;
   margin: 16px 0;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+lib-ngx-mkd .code-block-language {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  z-index: 1;
+  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  font-size: 12px;
+  line-height: 1;
+}
+
+lib-ngx-mkd .code-copy-button {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  z-index: 1;
+  border: 0;
+  padding: 2px 6px;
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+lib-ngx-mkd .code-block-wrapper pre {
+  margin: 0;
+}
+
+lib-ngx-mkd .code-block-wrapper pre code.hljs {
+  padding-top: 34px;
+}
+
+lib-ngx-mkd .mermaid-block-wrapper {
+  margin: 16px 0;
+  overflow-x: auto;
+}
+
+lib-ngx-mkd .mermaid {
+  display: flex;
+  justify-content: center;
 }
