@@ -19,5 +19,11 @@ lib-ngx-mkd {
 
 .markdown-body {
   padding: 20px;
-  transition: background-color 0.3s, color 0.3s;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+  transition: none;
 }

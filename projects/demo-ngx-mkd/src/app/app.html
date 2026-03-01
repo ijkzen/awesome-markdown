@@ -4,7 +4,7 @@
     <h1 class="title">{{ title() }}</h1>
   </div>
   <div class="header-right">
-    <button class="theme-toggle" (click)="toggleTheme()"
+    <button class="theme-toggle" (click)="toggleTheme($event)"
       [attr.aria-label]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
       [title]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'">
       @if (isDark()) {

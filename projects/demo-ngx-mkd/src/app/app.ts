@@ -2,6 +2,10 @@ import { Component, computed, effect, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgxMkdComponent } from 'ngx-mkd';
 
+type ViewTransitionDocument = Document & {
+  startViewTransition?: (updateCallback: () => void) => ViewTransition;
+};
+
 const SAMPLE_MARKDOWN = `# ngx-mkd Demo
 
 Welcome to the **ngx-mkd** demonstration! This demo showcases the markdown rendering capabilities.
@@ -179,7 +183,49 @@ export class App {
     return 'light';
   }
 
-  protected toggleTheme(): void {
-    this.theme.update(current => current === 'light' ? 'dark' : 'light');
+  protected toggleTheme(event: MouseEvent): void {
+    if (!this.canAnimateThemeTransition()) {
+      this.theme.update(current => current === 'light' ? 'dark' : 'light');
+      return;
+    }
+
+    const transitionDocument = document as ViewTransitionDocument;
+    const clickX = event.clientX;
+    const clickY = event.clientY;
+    const finalRadius = Math.hypot(
+      Math.max(clickX, window.innerWidth - clickX),
+      Math.max(clickY, window.innerHeight - clickY)
+    );
+
+    const transition = transitionDocument.startViewTransition?.(() => {
+      this.theme.update(current => current === 'light' ? 'dark' : 'light');
+    });
+
+    transition?.ready.then(() => {
+      document.documentElement.animate(
+        {
+          clipPath: [
+            `circle(0px at ${clickX}px ${clickY}px)`,
+            `circle(${finalRadius}px at ${clickX}px ${clickY}px)`
+          ]
+        },
+        {
+          duration: 480,
+          easing: 'cubic-bezier(0.2, 0, 0, 1)',
+          pseudoElement: '::view-transition-new(root)'
+        }
+      );
+    }).catch(() => {
+      this.theme.update(current => current === 'light' ? 'dark' : 'light');
+    });
+  }
+
+  private canAnimateThemeTransition(): boolean {
+    const transitionDocument = document as ViewTransitionDocument;
+    if (typeof transitionDocument.startViewTransition !== 'function') {
+      return false;
+    }
+
+    return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 }
