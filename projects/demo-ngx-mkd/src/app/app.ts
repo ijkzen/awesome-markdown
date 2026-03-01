@@ -1,4 +1,4 @@
-import { Component, signal, computed, effect } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgxMkdComponent } from 'ngx-mkd';
 
@@ -121,5 +121,12 @@ export class App {
 
   protected toggleTheme(): void {
     this.theme.update(current => current === 'light' ? 'dark' : 'light');
+    if (this.isDark()) {
+      document.body.classList.add('dark');
+      document.body.classList.remove('light');
+    } else {
+      document.body.classList.add('light');
+      document.body.classList.remove('dark');
+    }
   }
 }

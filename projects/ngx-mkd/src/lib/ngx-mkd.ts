@@ -14,7 +14,7 @@ marked.use({
   encapsulation: ViewEncapsulation.Emulated,
   imports: [],
   template: `<div class="markdown-body" [innerHTML]="safeHtml()"></div>`,
-  styleUrl: './ngx-mkd.component.css'
+  styleUrl: 'ngx-mkd.component.css'
 })
 export class NgxMkdComponent {
   markdown = input.required<string>();

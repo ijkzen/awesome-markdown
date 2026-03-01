@@ -9,9 +9,9 @@
 
 #### Core Rendering
 
-- [ ] **CORE-01**: Component accepts markdown source via input binding
-- [ ] **CORE-02**: Convert markdown to HTML using marked with GFM enabled
-- [ ] **CORE-03**: Apply github-markdown-css classes for GitHub-style rendering
+- [x] **CORE-01**: Component accepts markdown source via input binding
+- [x] **CORE-02**: Convert markdown to HTML using marked with GFM enabled
+- [x] **CORE-03**: Apply github-markdown-css classes for GitHub-style rendering
 
 #### Code Highlighting
 
@@ -22,11 +22,11 @@
 
 #### Copy Functionality
 
-- [ ] **COPY-01**: Display Copy button in top-right of each code block
-- [ ] **COPY-02**: Copy code block content to clipboard when clicked
-- [ ] **COPY-03**: Change button text to "Copied" after successful copy
-- [ ] **COPY-04**: Revert button text to "Copy" after 2 seconds
-- [ ] **COPY-05**: Log error to console if copy fails
+- [x] **COPY-01**: Display Copy button in top-right of each code block
+- [x] **COPY-02**: Copy code block content to clipboard when clicked
+- [x] **COPY-03**: Change button text to "Copied" after successful copy
+- [x] **COPY-04**: Revert button text to "Copy" after 2 seconds
+- [x] **COPY-05**: Log error to console if copy fails
 
 ### demo-ngx-mkd Application
 
@@ -64,18 +64,18 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CORE-01 | Phase 1 | Pending |
-| CORE-02 | Phase 1 | Pending |
-| CORE-03 | Phase 1 | Pending |
+| CORE-01 | Phase 1 | Complete |
+| CORE-02 | Phase 1 | Complete |
+| CORE-03 | Phase 1 | Complete |
 | CODE-01 | Phase 2 | Pending |
 | CODE-02 | Phase 2 | Pending |
 | CODE-03 | Phase 2 | Pending |
 | CODE-04 | Phase 2 | Pending |
-| COPY-01 | Phase 3 | Pending |
-| COPY-02 | Phase 3 | Pending |
-| COPY-03 | Phase 3 | Pending |
-| COPY-04 | Phase 3 | Pending |
-| COPY-05 | Phase 3 | Pending |
+| COPY-01 | Phase 3 | Complete |
+| COPY-02 | Phase 3 | Complete |
+| COPY-03 | Phase 3 | Complete |
+| COPY-04 | Phase 3 | Complete |
+| COPY-05 | Phase 3 | Complete |
 | LAYO-01 | Phase 4 | Pending |
 | LAYO-02 | Phase 4 | Pending |
 | LAYO-03 | Phase 4 | Pending |

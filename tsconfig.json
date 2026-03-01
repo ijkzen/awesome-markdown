@@ -7,6 +7,11 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
+    "paths": {
+      "ngx-mkd": [
+        "./dist/ngx-mkd"
+      ]
+    },
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "isolatedModules": true,
@@ -21,5 +26,19 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "files": []
+  "files": [],
+  "references": [
+    {
+      "path": "./projects/ngx-mkd/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngx-mkd/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/demo-ngx-mkd/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/demo-ngx-mkd/tsconfig.spec.json"
+    }
+  ]
 }

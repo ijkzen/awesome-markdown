@@ -7,7 +7,7 @@
 
 | # | Phase | Goal | Requirements | Success Criteria |
 |---|-------|------|--------------|------------------|
-| 1 | Core Library Setup | Set up ngx-mkd with marked and github-markdown-css | CORE-01, CORE-02, CORE-03 | 3 |
+| 1 | Core Library Setup | Complete    | 2026-02-28 | 3 |
 | 2 | Code Highlighting | Add highlight.js with language labels | CODE-01, CODE-02, CODE-03, CODE-04 | 4 |
 | 3 | Copy Button | Implement copy-to-clipboard for code blocks | COPY-01, COPY-02, COPY-03, COPY-04, COPY-05 | 5 |
 | 4:✓ | Demo Application | Build demo-ngx-mkd with layout and theming | LAYO-01, LAYO-02, LAYO-03, LAYO-04, LAYO-05, LAYO-06, LAYO-07, THEM-01, THEM-02, THEM-03 | 10 |
@@ -21,7 +21,7 @@
 **Status:** ● Complete (2026-02-28)
 
 **Plans:**
-- [x] 01-PLAN.md — Core library with marked (completed: CSS consumer responsibility)
+1/1 plans complete
 - [x] 01-01-SUMMARY.md — Summary with commit f814247
 
 **Requirements:**
