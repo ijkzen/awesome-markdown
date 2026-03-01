@@ -28,14 +28,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'pnpm'
+          node-version: "22"
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Build demo-ngx-mkd
-        run: pnpm ng build ngx-mkd && pnpm ng build demo-ngx-mkd --base-href=/awesome-markdown/
+        run: pnpm ng build ngx-mkd && pnpm ng build demo-ngx-mkd --base-href=/awesome-markdown/ --verbose
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
