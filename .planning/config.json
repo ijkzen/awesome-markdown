@@ -1,33 +1,27 @@
 {
-  "mode": "interactive",
-  "depth": "comprehensive",
-  "parallelization": true,
+  "model_profile": "custom",
   "commit_docs": true,
-  "model_profile": "genius",
+  "search_gitignored": false,
+  "branching_strategy": "none",
+  "phase_branch_template": "gsd/phase-{phase}-{slug}",
+  "milestone_branch_template": "gsd/{milestone}-{slug}",
   "workflow": {
     "research": true,
     "plan_check": true,
     "verifier": true,
-    "auto_advance": false,
-    "nyquist_validation": true
+    "nyquist_validation": true,
+    "auto_advance": false
   },
-  "git": {
-    "branching_strategy": "none"
-  },
+  "parallelization": true,
+  "brave_search": false,
+  "mode": "yolo",
+  "depth": "comprehensive",
   "profiles": {
     "profile_type": "genius",
     "models": {
-      "planning": "bailian-coding-plan/kimi-k2.5",
-      "execution": "bailian-coding-plan/MiniMax-M2.5",
+      "planning": "bailian-coding-plan/MiniMax-M2.5",
+      "execution": "bailian-coding-plan/kimi-k2.5",
       "verification": "bailian-coding-plan/glm-5"
-    },
-    "presets": {
-      "genius": {
-        "planning": "bailian-coding-plan/MiniMax-M2.5",
-        "execution": "bailian-coding-plan/kimi-k2.5",
-        "verification": "bailian-coding-plan/glm-5"
-      }
-    },
-    "active_profile": "genius"
+    }
   }
 }
