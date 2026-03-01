@@ -77,6 +77,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo-ngx-mkd/src/environments/environment.ts",
+                  "with": "projects/demo-ngx-mkd/src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
